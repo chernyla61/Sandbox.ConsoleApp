@@ -8,9 +8,9 @@ namespace Sandbox.ConsoleApp
 {
     public class Singleton
     {
-        private static Singleton? _singltonObject;
+        private static Singleton _singltonObject;
 
-        public  static Singleton getObject()
+        public  static Singleton getInstance()
         {
             if(_singltonObject == null){
                 _singltonObject = new Singleton();
