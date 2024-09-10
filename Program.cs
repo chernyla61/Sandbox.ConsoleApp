@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Sandbox.ConsoleApp
+﻿namespace Sandbox.ConsoleApp
 {
     internal class Program
     {
@@ -20,17 +16,18 @@ namespace Sandbox.ConsoleApp
         /// <param name="args">Command Line Arguments</param>
         static void Main(string[] args)
         {
-            List<char[]> listOfArrays = new List<char[]>
-        {
-            new char[] { 'a', 'b', 'c' },
-            new char[] { 'd', 'e', 'a' },
-            new char[] { 'f', 'g', 'c' },
-            new char[] { 'a', 'c', 'e' }
-        };
+            var ranking = new Ranking();
+            var listOfArrays = new List<char[]>
+            {
+                new char[] { 'a', 'b', 'c' },
+                new char[] { 'd', 'e', 'a' },
+                new char[] { 'f', 'g', 'c' },
+                new char[] { 'a', 'c', 'e' }
+            };
 
-            char[] inputArray = new char[] { 'a', 'c' };
+            var inputArray = new char[] { 'a', 'c' };
 
-            var result = RankElementsByCriteria(listOfArrays, inputArray);
+            var result = ranking.RankElementsByCriteria(listOfArrays, inputArray);
             Console.WriteLine("\n\n Rank Elements By Criteria ....\n\n  ");
             foreach (var item in result)
             {
@@ -41,49 +38,10 @@ namespace Sandbox.ConsoleApp
             Console.WriteLine("\n\n Find characters in string ....\n\n  ");
             string s = "sffgnwfrgsfsfhn";
             char test= 's';
-            int n = findNumOfChars(s, test);
+            int n = ranking.findNumOfChars(s, test);
             Console.WriteLine(n);
         }
 
-        public static IEnumerable<(char Element, int Rank)> RankElementsByCriteria(List<char[]> listOfArrays, char[] inputArray)
-        {
-            //create a unique set from Array (param 2)
-            var uniqueSet  = new HashSet<char>(inputArray);
-
-            //create list without elements from  array (param 2)
-            var filtList = listOfArrays.Where(arr => arr.Except(uniqueSet).Count() != arr.Count());
-
-            //create a flat set of all elements in the ListOfArrays
-            var flatSet = filtList.SelectMany(el => el).Distinct();
-
-            //create a list of ananimous objects with ranks
-            var anaObjs = flatSet.Select(el =>
-            {
-                var anObj = new
-                {
-                    element = el,
-                    rank = filtList.Count(arr => arr.Contains(el))
-                };
-                return anObj;
-            });
-
-
-            //create ordered list of element tuples from ananimous objects
-            var listOfTuples = anaObjs
-                .OrderByDescending(a => a.rank)
-                .ThenBy(a=>a.element)
-                .Select(o=>(o.element, o.rank));
-
-            return listOfTuples;
-        }
-
-
-        public static int findNumOfChars(string s, char c)
-        {
-            int result = 0;
-            result = s.Count(chr => chr == c);
-            return result;
-        }
 
     }
 
