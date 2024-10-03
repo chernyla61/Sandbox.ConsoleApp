@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace Sandbox.ConsoleApp
 {
     public class Ranking
@@ -46,5 +47,29 @@ namespace Sandbox.ConsoleApp
             result = s.Count(chr => chr == c);
             return result;
         }
+
+
+        public int FindMaxDifference(int[] numbers)
+        {
+
+
+            int min = numbers[0];
+            int max = numbers[1];
+            int diff = max - min;
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                min = Math.Min(numbers[i], min);
+                max = Math.Max(numbers[i], max);
+                diff = Math.Max(diff, max - min);
+            }
+
+
+
+            return diff;
+        }
+
+
+
     }
 }

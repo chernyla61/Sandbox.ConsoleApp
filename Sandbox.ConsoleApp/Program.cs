@@ -40,6 +40,13 @@
             char test= 's';
             int n = ranking.findNumOfChars(s, test);
             Console.WriteLine(n);
+
+
+            var arrQ = new ArrayQuizProblems();
+
+            int[] numbers = { 10, 15, 25, 7, 4, 3, 67 };
+            int retVal  = arrQ.FindMaxDifference(numbers);
+            Console.WriteLine(retVal);
         }
 
 
