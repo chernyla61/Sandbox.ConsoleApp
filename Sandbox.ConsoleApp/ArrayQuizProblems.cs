@@ -26,17 +26,17 @@ namespace Sandbox.ConsoleApp
         }
 
         // check if second string has characters and secuence from first string subsequence
-        public bool IsSubsequence(string first, string second)
+        public bool IsSubsequence( string str1,string str2)
         {
-            if (string.IsNullOrEmpty(first)) return true;
+            if (string.IsNullOrEmpty(str2)) return true;
 
             int j = 0;
-            foreach (var chr in second)
+            foreach (var chr in str1)
             {
-                if (chr == first[j])
+                if (chr == str2[j])
                 {
                     j++;  // Increment j only after a match
-                    if (j == first.Length) return true;
+                    if (j == str2.Length) return true;
                     
                 }
             }
